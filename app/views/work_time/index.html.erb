@@ -1,5 +1,14 @@
-<h2>WorkTimeController#index</h2>
+<h2>Lista wykonanych godzin</h2>
 
+<table id="work_time_list">
+<tr>
+	<th>Start</th>
+	<th>Koniec</th>
+</tr>
 <% @work_items.each do |work_time| %>
-	<p>
+<tr>
+	<td><%= work_time.start %></td>
+	<td><%= work_time.end %></td>
+</tr>
 <% end %>
+</table>

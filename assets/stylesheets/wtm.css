@@ -1,9 +1,14 @@
 #wtm-button {
 	width: 100%;
-	background-color: #0f0;
-
+	background-color: #5BB75B;
+	color: white;
+	height: 30px;
 	text-align: center;
-	font-weight: 800;
+	font-weight: 400;
 	font-size: 18px;
 	padding: 5px;
+}
+
+#wtm-button.running {
+	background-color: #FAA732;
 }

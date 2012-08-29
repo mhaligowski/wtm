@@ -8,5 +8,4 @@ Redmine::Plugin.register :wtm do
   author_url 'http://github.com/mhaligowski/'
   permission :work_items, { :work_items => [:index, :toggle] }, :public => false
   menu :top_menu, :work_items, { :controller => 'work_time', :action => 'index' }, :caption => "Czas pracy"
-  menu :account_menu, :work_items, { :controller => 'work_time', :action => 'toggle' }, :caption => "Start pracy"
 end
