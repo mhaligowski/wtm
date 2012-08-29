@@ -1,3 +1,11 @@
 class WorkTime < ActiveRecord::Base
-  unloadable
+	belongs_to :user
+	
+	def start(time)
+		puts "start"
+	end
+
+	def stop(time)
+		puts "stop"
+	end
 end
