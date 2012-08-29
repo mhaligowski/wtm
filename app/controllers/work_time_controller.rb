@@ -1,13 +1,17 @@
 class WorkTimeController < ApplicationController
   unloadable
 
+  before_filter :require_login
 
   def index
+  	@work_items = WorkTime.all
   end
 
-  def start
-  end
+  def toggle
+  	puts "toggle"
 
-  def stop
+  	respond_to do |format|
+  		format.js { render :layout => false }
+  	end
   end
 end
