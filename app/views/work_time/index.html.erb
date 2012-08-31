@@ -1,17 +1,23 @@
-<h2>Lista wykonanych godzin</h2>
+<h2><%= l(:hours_list) %></h2>
+
+<% if not @work_items.empty? %>
 
 <table id="work_time_list">
 <tr>
 	<% if User.current.admin? %> <th>Użytkownik</th> <% end %>
 	<th>Start</th>
 	<th>Koniec</th>
+	<th>Liczba godzin</th>
 </tr>
 
 <% @work_items.each do |work_time| %>
 <tr>
 	<% if User.current.admin? %> <td><%= work_time.user.login %></td> <% end %>
-	<td><%= work_time.start %></td>
-	<td><%= work_time.end %></td>
+	<td><%= format_time(work_time.start) %></td>
+	<td><%= format_time(work_time.end) %></td>
+	<td><%= ((work_time.start - work_time.end) / 1.hour).round %></td>
 </tr>
 <% end %>
 </table>
+
+<% end %>
