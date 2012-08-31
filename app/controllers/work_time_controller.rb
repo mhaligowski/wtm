@@ -4,7 +4,12 @@ class WorkTimeController < ApplicationController
   before_filter :require_login
 
   def index
-  	@work_items = WorkTime.find_all_by_user_id(User.current)
+    if User.current.admin?
+      @work_items = WorkTime.all
+    else
+      @work_items = WorkTime.find_all_by_user_id(User.current)
+    end
+
     @work_items
   end
 
