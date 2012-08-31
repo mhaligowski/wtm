@@ -4,10 +4,18 @@ class WorkTimeController < ApplicationController
   before_filter :require_login
 
   def index
-    if User.current.admin?
-      @work_items = WorkTime.all
+    # filter by dates
+    if params[:date].nil?
+      @work_items = WorkTime.where(nil)
     else
-      @work_items = WorkTime.find_all_by_user_id(User.current)
+      @work_items = WorkTime.find_all_by_month_and_year(Integer(params[:date][:month]), Integer(params[:date][:year]))
+    end
+
+    # filter by user
+    if not params[:user].nil? 
+      @work_items = @work_items.where(:user_id => Integer(params[:user][:id]))
+    elsif not User.current.admin?
+      @work_items = @work_items.where(:user_id => User.current)
     end
 
     @work_items

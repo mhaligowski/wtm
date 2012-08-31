@@ -1,5 +1,19 @@
 <h2><%= l(:hours_list) %></h2>
 
+<%= form_tag do %>
+	<% if User.current.admin? %>
+		<%= label_tag(:user, "Użytkownik") %>
+		<%= collection_select(:user, :id, User.all.find_all{|u| not u.anonymous?}, :id, :login) %>
+	<% end %>
+
+	<%= label_tag(:date, "Miesiąc") %>
+
+	<%= select_month Date.today %>
+	<%= select_year Date.today, :start_year => 2012, :end_year => Date.today.year %>
+
+	<%= submit_tag("Filtruj") %>
+<% end %>
+
 <% if not @work_items.empty? %>
 
 <table id="work_time_list">
@@ -15,7 +29,7 @@
 	<% if User.current.admin? %> <td><%= work_time.user.login %></td> <% end %>
 	<td><%= format_time(work_time.start) %></td>
 	<td><%= format_time(work_time.end) %></td>
-	<td><%= ((work_time.start - work_time.end) / 1.hour).round %></td>
+	<td><%= ((work_time.end - work_time.start) / 1.hour).round %></td>
 </tr>
 <% end %>
 </table>
