@@ -30,7 +30,10 @@ class WorkTimeController < ApplicationController
   	if wt.nil?
   		wt = WorkTime.create(
   			user: user,
-  			start: DateTime.current())
+  			start: DateTime.current(),
+        remoteip: request.remote_ip
+      )
+
   	else
   		# if started, just set the end date
   		wt.end = DateTime.current()

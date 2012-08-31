@@ -19,17 +19,18 @@
 <table id="work_time_list">
 <tr>
 	<% if User.current.admin? %> <th>Użytkownik</th> <% end %>
+	<% if User.current.admin? %> <th>IP</th> <% end %>
 	<th>Start</th>
 	<th>Koniec</th>
-	<th>Liczba godzin</th>
+
 </tr>
 
 <% @work_items.each do |work_time| %>
 <tr>
 	<% if User.current.admin? %> <td><%= work_time.user.login %></td> <% end %>
+	<% if User.current.admin? %> <td><%= work_time.remoteip %></td> <% end %>
 	<td><%= format_time(work_time.start) %></td>
 	<td><%= format_time(work_time.end) %></td>
-	<td><%= ((work_time.end - work_time.start) / 1.hour).round %></td>
 </tr>
 <% end %>
 </table>
