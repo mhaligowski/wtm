@@ -1,6 +1,6 @@
 class WtmHookListener < Redmine::Hook::ViewListener
 	# render the button
-	render_on :view_layouts_base_after_head, :partial => "work_time/button"
+	render_on :view_welcome_index_top, :partial => "work_time/button"
 
 	def view_layouts_base_html_head(context = {})
 		# add the stylesheet

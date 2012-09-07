@@ -1,4 +1,4 @@
-require 'WtmHookListener'
+require 'wtm_hook_listener'
 
 Redmine::Plugin.register :wtm do
   name 'Wtm plugin'
