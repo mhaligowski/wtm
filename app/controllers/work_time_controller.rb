@@ -31,7 +31,7 @@ class WorkTimeController < ApplicationController
   		wt = WorkTime.create(
   		  :user_id => user,
   			:start => DateTime.current(),
-        :remoteip =>  request.remote_ip
+        :remoteip => request.remote_ip
       )
 
   	else

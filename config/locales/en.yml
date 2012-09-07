@@ -1,3 +1,6 @@
 # English strings go here for Rails i18n
 en:
-  my_label: "My label"
+  hours_list: Work times list
+  work_time_menu_item: WTM
+  wtm_start: Start work
+  wtm_stop: Stop work

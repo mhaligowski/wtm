@@ -2,9 +2,9 @@
 <% wt = WorkTime.current(User.current) %>
 <div id="wtm-button" class="<%= wt.nil? ? 'new' : 'running' %>">
 	<% if wt.nil? %> 
-		<%= link_to 'Rozpocznij', {:controller => "work_time", :action => "toggle"}, { :remote => true } %> 
+		<%= link_to t(:wtm_start), {:controller => "work_time", :action => "toggle"}, { :remote => true } %> 
 	<% else %>
-		<%= link_to 'Koniec', {:controller => "work_time", :action => "toggle"}, { :remote => true } %>
+		<%= link_to t(:wt_stop), {:controller => "work_time", :action => "toggle"}, { :remote => true } %>
 	<% end %>
 </div>
 <% end %>

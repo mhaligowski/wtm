@@ -2,23 +2,23 @@
 
 <%= form_tag do %>
 	<% if User.current.admin? %>
-		<%= label_tag(:user, "Użytkownik") %>
+		<%= label_tag(:user, t(:field_user)) %>
 		<%= collection_select(:user, :id, User.all.find_all{|u| not u.anonymous?}, :id, :login) %>
 	<% end %>
 
-	<%= label_tag(:date, "Miesiąc") %>
+	<%= label_tag(:date, t(:label_month)) %>
 
 	<%= select_month Date.today %>
 	<%= select_year Date.today, :start_year => 2012, :end_year => Date.today.year %>
 
-	<%= submit_tag("Filtruj") %>
+	<%= submit_tag l(:label_search) %>
 <% end %>
 
 <% if not @work_items.empty? %>
 
 <table id="work_time_list">
 <tr>
-	<% if User.current.admin? %> <th>Użytkownik</th> <% end %>
+	<% if User.current.admin? %> <th><%= t(:label_user) %></th> <% end %>
 	<% if User.current.admin? %> <th>IP</th> <% end %>
 	<th>Start</th>
 	<th>Koniec</th>

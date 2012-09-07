@@ -1,2 +1,5 @@
 pl:
-  hours_list: "Lista przepracowanych godzin"
+  hours_list: Lista przepracowanych godzin
+  work_time_menu_item: WTM
+  wtm_start: Rozpocznij pracę
+  wtm_stop: Zakończ pracę
