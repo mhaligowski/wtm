@@ -29,9 +29,9 @@ class WorkTimeController < ApplicationController
   	# not started
   	if wt.nil?
   		wt = WorkTime.create(
-  			user: user,
-  			start: DateTime.current(),
-        remoteip: request.remote_ip
+  		  :user_id => user,
+  			:start => DateTime.current(),
+        :remoteip =>  request.remote_ip
       )
 
   	else
