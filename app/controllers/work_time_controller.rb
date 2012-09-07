@@ -13,9 +13,12 @@ class WorkTimeController < ApplicationController
 
     # filter by user
     if not params[:user].nil? 
-      @work_items = @work_items.where(:user_id => Integer(params[:user][:id]))
+      @user = User.new
+      @user.id = params[:user][:id];
+
+      @work_items = @work_items.where(:user_id => @user.id)
     elsif not User.current.admin?
-      @work_items = @work_items.where(:user_id => User.current)
+      @work_items = @work_items.where(:q => User.current)
     end
 
     @work_items
