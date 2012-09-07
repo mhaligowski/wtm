@@ -9,6 +9,8 @@ class WorkTimeController < ApplicationController
       @work_items = WorkTime.where(nil)
     else
       @work_items = WorkTime.find_all_by_month_and_year(Integer(params[:date][:month]), Integer(params[:date][:year]))
+      @month = Integer(params[:date][:month])
+      @year = Integer(params[:date][:year])
     end
 
     # filter by user

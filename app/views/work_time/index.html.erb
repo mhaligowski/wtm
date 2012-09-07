@@ -8,8 +8,8 @@
 
 	<%= label_tag(:date, t(:label_month)) %>
 
-	<%= select_month Date.today %>
-	<%= select_year Date.today, :start_year => 2012, :end_year => Date.today.year %>
+	<%= select_month (@month or Date.today.month) %>
+	<%= select_year (@year or Date.today.year), :start_year => 2012, :end_year => Date.today.year %>
 
 	<%= submit_tag l(:label_search) %>
 <% end %>
