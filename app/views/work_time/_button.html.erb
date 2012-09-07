@@ -1,3 +1,8 @@
+<% content_for :header_tags do %>
+    <%= stylesheet_link_tag 'wtm', :plugin => :wtm %>
+    <%= javascript_include_tag 'wtm_clock', :plugin => :wtm %>
+<% end %>
+
 <% if User.current.logged? %>
 <% wt = WorkTime.current(User.current) %>
 <div id="wtm-button" class="<%= wt.nil? ? 'new' : 'running' %>">
@@ -5,6 +10,8 @@
 		<%= link_to t(:wtm_start), {:controller => "work_time", :action => "toggle"}, { :remote => true } %> 
 	<% else %>
 		<%= link_to t(:wtm_stop), {:controller => "work_time", :action => "toggle"}, { :remote => true } %>
+		<!-- clock -->
+		<span id="wtm-clock" data-start=<%= (wt.start.to_i * 1000) %>></span>
 	<% end %>
 </div>
 <% end %>
