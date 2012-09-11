@@ -10,8 +10,8 @@ class WorkTimeController < ApplicationController
     sort_init [ %w( user_id remoteip start stop ) ]
     sort_update %w(user_id start remoteip stop)
 
-    @month = params[:month].nil? ? Date.today.month : Integer(params[:month])
-    @year = params[:year].nil? ? Date.today.year : Integer(params[:year])
+    @from = params[:from].nil? ? Date.today.at_beginning_of_month : params[:from]
+    @to = params[:to].nil? ? Date.today.at_end_of_month : params[:to]
 
     if not User.current.admin?
       @user_id = User.current.id
@@ -19,7 +19,7 @@ class WorkTimeController < ApplicationController
       @user_id = params[:user_id]
     end
 
-    @work_items = WorkTime.find_all_by_month_and_year(@month, @year)
+    @work_items = WorkTime.where(:start => @from..@to)
     @work_items = @work_items.order sort_clause
 
     if not @user_id.nil? and not @user_id.blank?
