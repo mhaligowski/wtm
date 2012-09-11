@@ -3,3 +3,8 @@ pl:
   work_time_menu_item: WTM
   wtm_start: Rozpocznij pracę
   wtm_stop: Zakończ pracę
+  label_interval: Zakres danych
+  label_person: Użytkownik
+  label_ip: Adres IP
+  label_start: Rozpoczęcie pracy
+  label_end: Zakończenie pracy

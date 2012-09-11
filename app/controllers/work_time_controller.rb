@@ -3,24 +3,27 @@ class WorkTimeController < ApplicationController
 
   before_filter :require_login
 
+  helper :sort
+  include SortHelper
+
   def index
-    # filter by dates
-    if params[:date].nil?
-      @work_items = WorkTime.where(nil)
+    sort_init [ %w( user_id remoteip start stop ) ]
+    sort_update %w(user_id start remoteip stop)
+
+    @month = params[:month].nil? ? Date.today.month : Integer(params[:month])
+    @year = params[:year].nil? ? Date.today.year : Integer(params[:year])
+
+    if not User.current.admin?
+      @user_id = User.current.id
     else
-      @work_items = WorkTime.find_all_by_month_and_year(Integer(params[:date][:month]), Integer(params[:date][:year]))
-      @month = Integer(params[:date][:month])
-      @year = Integer(params[:date][:year])
+      @user_id = params[:user_id]
     end
 
-    # filter by user
-    if not params[:user].nil? 
-      @user = User.new
-      @user.id = params[:user][:id];
+    @work_items = WorkTime.find_all_by_month_and_year(@month, @year)
+    @work_items = @work_items.order sort_clause
 
-      @work_items = @work_items.where(:user_id => @user.id)
-    elsif not User.current.admin?
-      @work_items = @work_items.where(:q => User.current)
+    if not @user_id.nil? and not @user_id.blank?
+      @work_items = @work_items.where("user_id = ?", @user_id)
     end
 
     @work_items

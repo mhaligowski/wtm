@@ -4,3 +4,8 @@ en:
   work_time_menu_item: WTM
   wtm_start: Start work
   wtm_stop: Stop work
+  label_interval: Interval
+  label_person: User
+  label_ip: IP Address
+  label_start: Start
+  label_end: End

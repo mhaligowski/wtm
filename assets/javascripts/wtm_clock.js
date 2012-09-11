@@ -1,5 +1,6 @@
-wtm = {
-	update: function(ce, perdiodical_executer) {
+var wtm = wtm || {};
+
+wtm.update = function(ce, perdiodical_executer) {
 		var current = (new Date()).getTime();
 		var old = Number(ce.readAttribute('data-start'));
 		var diff = Math.floor((current - old) / 1000); // seconds only
@@ -10,9 +11,9 @@ wtm = {
 
 		// update the clock
 		ce.update("(" + hours + ":" + minutes + ":" + seconds + ")");
-	},
+	};
 
-	start_clock : function() {
+wtm.start_clock = function() {
 		// stop the earlier clock
 		if (wtm.timer != null) {
 			wtm.timer.stop();
@@ -31,8 +32,9 @@ wtm = {
 		wtm.update(clock_elem);
 		wtm.timer = new PeriodicalExecuter(function(pe) { wtm.update(clock_elem, pe); }, 1);
 
-	},
-	stop_clock : function() {
+	};
+
+wtm.stop_clock = function() {
 		// stop the clock
 		if (wtm.timer != null) wtm.timer.stop();
 

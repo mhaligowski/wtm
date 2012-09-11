@@ -1,38 +1,47 @@
 <h2><%= l(:hours_list) %></h2>
 
-<%= form_tag do %>
-	<% if User.current.admin? %>
-		<%= label_tag(:user, t(:field_user)) %>
-		<%= collection_select(:user, :id, User.all.find_all{|u| not u.anonymous?}, :id, :login) %>
-	<% end %>
-
-	<%= label_tag(:date, t(:label_month)) %>
-
-	<%= select_month (@month or Date.today.month) %>
-	<%= select_year (@year or Date.today.year), :start_year => 2012, :end_year => Date.today.year %>
-
-	<%= submit_tag l(:label_search) %>
+<% content_for :header_tags do %>
+	<%= javascript_include_tag :wtm, :plugin => :wtm %>
 <% end %>
 
-<% if not @work_items.empty? %>
+<%= form_tag({}, :method => :get) do %>
 
-<table id="work_time_list">
-<tr>
-	<% if User.current.admin? %> <th><%= t(:label_user) %></th> <% end %>
-	<% if User.current.admin? %> <th>IP</th> <% end %>
-	<th>Start</th>
-	<th>Koniec</th>
+<fieldset><legend><%= l(:label_filter_plural) %></legend>
 
-</tr>
+<% if User.current.admin? %>
+<label for='user_id'><%= l(:field_user) %>:</label>
+<%= select_tag 'user_id', users_for_filtering(@user_id), :class => "small"  %>
+<% end %>
 
+<%= label_tag('month', l(:label_month)) %>
+<%= select_month(@month, :prefix => "month", :discard_type => true) %>
+<%= label_tag('year', l(:label_year)) %>
+<%= select_year(@year, :prefix => "year", :discard_type => true) %>
+
+<%= submit_tag l(:button_apply), :class => "small", :name => nil %>
+<%= link_to l(:button_clear), "/wtm", :class => 'icon icon-reload' %>
+</fieldset>
+
+<% end %>
+
+&nbsp;
+
+<table class="list issues">
+    <thead><tr>
+    <%= sort_header_tag('user_id', :caption => l(:label_user)) %>
+    <%= sort_header_tag('remoteip', :caption => l(:label_ip)) %>
+    <%= sort_header_tag('start', :caption => l(:label_start)) %>
+    <%= sort_header_tag('end', :caption => l(:label_end)) %>
+  <% previous_group = false %>
+
+  <tbody>
 <% @work_items.each do |work_time| %>
-<tr>
-	<% if User.current.admin? %> <td><%= work_time.user.login %></td> <% end %>
-	<% if User.current.admin? %> <td><%= work_time.remoteip %></td> <% end %>
-	<td><%= format_time(work_time.start) %></td>
-	<td><%= format_time(work_time.end) %></td>
-</tr>
+	<tr>
+		<% if User.current.admin? %> <td><%= work_time.user.login %></td> <% end %>
+		<% if User.current.admin? %> <td><%= work_time.remoteip %></td> <% end %>
+		<td><%= format_time(work_time.start) %></td>
+		<td><%= format_time(work_time.end) %></td>
+	</tr>
 <% end %>
+  </tbody>
 </table>
-
-<% end %>
