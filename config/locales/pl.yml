@@ -8,3 +8,6 @@ pl:
   label_ip: Adres IP
   label_start: Rozpoczęcie pracy
   label_end: Zakończenie pracy
+  report_time: Raport czasu
+  report_present: Raport obecności
+  report_time_task: Raport zadań i czasu
