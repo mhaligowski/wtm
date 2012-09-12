@@ -38,7 +38,16 @@ class WorkTimeController < ApplicationController
     ActiveRecord::Base.establish_connection
     @r = ActiveRecord::Base.connection.execute(q);
 
-    @r
+    if @r.class == Array
+      @r
+    else
+      @result = []
+      while row = @r.fetch_row do
+        @result += row
+      end
+
+      @result
+    end
   end
 
   def toggle

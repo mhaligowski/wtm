@@ -12,7 +12,7 @@
 	<tbody>
 		<% c = 1 %>
 		<% @r.each do |row| %>
-			<tr class="<% if c % 2 == 0%>even<% else %>odd<% end %>">
+			<tr class="<% if c % 2 == 0 %>even<% else %>odd<% end %>">
 				<%= content_tag :td, row["start"].nil? ? "nieobecny" : "obecny" %>
 				<%= content_tag :td, row["login"] %>
 				<%= content_tag :td, format_time(row["start"]) %>
