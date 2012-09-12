@@ -39,8 +39,8 @@ wtm.stop_clock = function() {
 		if (wtm.timer != null) wtm.timer.stop();
 
 		$('wtm-clock').purge();
-	}
-}
+	};
+};
 
 // at starting the page
 Event.observe(window, 'load', function() {
@@ -48,4 +48,4 @@ Event.observe(window, 'load', function() {
 	if (elem != null) {
 		wtm.start_clock();
 	}
-})
+});

@@ -29,6 +29,18 @@ class WorkTimeController < ApplicationController
     @work_items
   end
 
+  def report_present
+    q = "SELECT users.login, work_times.remoteip, work_times.start FROM users
+           LEFT OUTER JOIN work_times ON (work_times.user_id = users.id 
+                                      AND work_times.end IS NULL) 
+          WHERE users.type = 'User'"
+
+    ActiveRecord::Base.establish_connection
+    @r = ActiveRecord::Base.connection.execute(q);
+
+    @r
+  end
+
   def toggle
   	user = User.current
 

@@ -16,7 +16,7 @@ Redmine::Plugin.register :wtm do
 
   menu(:wtm_menu, 
   	:work_items_report_present_menu_item, 
-  	{ :controller => 'work_time', :action => 'index'}, 
+  	{ :controller => 'work_time', :action => 'report_present'}, 
   	:caption => :report_present)
 
   menu(:wtm_menu,

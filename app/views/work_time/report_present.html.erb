@@ -1,0 +1,24 @@
+<h2><%= l(:report_present) %></h2>
+
+<table class="list">
+	<thead>
+		<tr>
+			<%= content_tag :th, l(:label_present) %>
+			<%= content_tag :th, l(:label_person) %>
+			<%= content_tag :th, l(:label_start) %>
+			<%= content_tag :th, l(:label_ip) %>
+		</tr>
+	</thead>
+	<tbody>
+		<% c = 1 %>
+		<% @r.each do |row| %>
+			<tr class="<% if c % 2 == 0%>even<% else %>odd<% end %>">
+				<%= content_tag :td, row["start"].nil? ? "nieobecny" : "obecny" %>
+				<%= content_tag :td, row["login"] %>
+				<%= content_tag :td, format_time(row["start"]) %>
+				<%= content_tag :td, row["remoteip"] %>
+			</tr>
+			<% c += 1 %>
+		<% end %>
+	</tbody>
+</table>

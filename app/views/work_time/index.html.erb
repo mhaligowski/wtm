@@ -29,22 +29,25 @@
 
 &nbsp;
 
-<table class="list issues">
-    <thead><tr>
-    <%= sort_header_tag('user_id', :caption => l(:label_user)) %>
-    <%= sort_header_tag('remoteip', :caption => l(:label_ip)) %>
-    <%= sort_header_tag('start', :caption => l(:label_start)) %>
-    <%= sort_header_tag('end', :caption => l(:label_end)) %>
-  <% previous_group = false %>
+<table class="list">
+    <thead>
+      <tr>
+        <%= sort_header_tag('user_id', :caption => l(:label_user)) %>
+        <%= sort_header_tag('remoteip', :caption => l(:label_ip)) %>
+        <%= sort_header_tag('start', :caption => l(:label_start)) %>
+        <%= sort_header_tag('end', :caption => l(:label_end)) %>
+        <% previous_group = false %>
+      </tr>
+    </thead>
 
-  <tbody>
-<% @work_items.each do |work_time| %>
-	<tr>
-		<% if User.current.admin? %> <td><%= work_time.user.login %></td> <% end %>
-		<% if User.current.admin? %> <td><%= work_time.remoteip %></td> <% end %>
-		<td><%= format_time(work_time.start) %></td>
-		<td><%= format_time(work_time.end) %></td>
-	</tr>
-<% end %>
-  </tbody>
+    <tbody>
+      <% @work_items.each do |work_time| %>
+      	<tr>
+      		<% if User.current.admin? %> <td><%= work_time.user.login %></td> <% end %>
+      		<% if User.current.admin? %> <td><%= work_time.remoteip %></td> <% end %>
+      		<td><%= format_time(work_time.start) %></td>
+      		<td><%= format_time(work_time.end) %></td>
+      	</tr>
+      <% end %>
+    </tbody>
 </table>
