@@ -40,13 +40,13 @@ class WorkTimeController < ApplicationController
 
     if @r.class == Array
       @r
-    else
+    elsif @r.class == Mysql::Result
       @result = []
       while row = @r.fetch_row do
-        @result += row
+        @result << row
       end
 
-      @result
+      @r = @result
     end
   end
 
