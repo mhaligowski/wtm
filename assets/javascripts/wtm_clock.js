@@ -40,7 +40,6 @@ wtm.stop_clock = function() {
 
 		$('wtm-clock').purge();
 	};
-};
 
 // at starting the page
 Event.observe(window, 'load', function() {
