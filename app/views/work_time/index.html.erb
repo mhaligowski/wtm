@@ -32,8 +32,8 @@
 <table class="list">
     <thead>
       <tr>
-        <%= sort_header_tag('user_id', :caption => l(:label_user)) %>
-        <%= sort_header_tag('remoteip', :caption => l(:label_ip)) %>
+        <% if User.current.admin? %><%= sort_header_tag('user_id', :caption => l(:label_user)) %><% end %>
+        <% if User.current.admin? %><%= sort_header_tag('remoteip', :caption => l(:label_ip)) %><% end %>
         <%= sort_header_tag('start', :caption => l(:label_start)) %>
         <%= sort_header_tag('end', :caption => l(:label_end)) %>
         <% previous_group = false %>

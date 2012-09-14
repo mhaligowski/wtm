@@ -50,6 +50,12 @@ class WorkTimeController < ApplicationController
     end
   end
 
+  def report_tast_time
+    @work_items = WorkTime.select("user_id, users.firstname, users.lastname, sum(end-start) diff").where("end is not null").group("user_id").joins(:user)
+    puts @work_items
+    @time_entries = TimeEntry.select("user_id, issues.subject, time_spent, spent_on").joins(:issue)
+  end
+
   def toggle
   	user = User.current
 

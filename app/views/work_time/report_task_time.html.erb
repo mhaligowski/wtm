@@ -1,0 +1,5 @@
+<% unless @work_items.nil? %>
+	<% @work_items.each do |wt| %>
+		<%= wt.users.firstname %>
+	<% end %>
+<% end %>
