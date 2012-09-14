@@ -13,10 +13,10 @@
 	<% unless @work_items.nil? %>
 		<% @work_items.each do |wt| %>
 			<% entries = @time_entries.where(:user_id => wt.user_id) %>
-			<tr class="<%= entries.sum("hours") <= wt.diff / 60 / 60 ? "red" : "green" %>" >
+			<tr class="<%= entries.sum("hours") <= Integer(wt.diff) / 60 / 60 ? "red" : "green" %>" >
 				<td>1</td>
 				<%= content_tag "td", wt.firstname + " " + wt.lastname %>
-				<%= content_tag "td", number_with_delimiter(wt.diff / 3600) %>
+				<%= content_tag "td", number_with_delimiter(Integer(wt.diff) / 3600) %>
 
 				<% @time_entries.where(:user_id => wt.user_id).each do |te| %>
 					<tr>
