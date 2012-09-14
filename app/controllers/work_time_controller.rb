@@ -54,12 +54,31 @@ class WorkTimeController < ApplicationController
     sort_init [ %w( user_id lastname ) ]
     sort_update %w(user_id lastname)
 
-    @time_entries = TimeEntry.select("user_id, issues.subject, hours, spent_on").joins(:issue)
-    if ActiveRecord::Base.connection.adapter_name == 'MySQL'
-      @work_items = WorkTime.select("user_id, users.firstname, users.lastname, sum(unix_timestamp(end) - unix_timestamp(start) ) diff").where("end is not null").group("user_id").joins(:user)
-    else 
-      @work_items = WorkTime.select("user_id, users.firstname, users.lastname, sum(strftime('%s', end) - strftime('%s', start)) diff").where("end is not null").group("user_id").joins(:user)
+    @from = params[:from].nil? ? Date.today.at_beginning_of_month : params[:from]
+    @to = params[:to].nil? ? Date.today.at_end_of_month : params[:to]
+
+    # time entries
+    @time_entries = TimeEntry.select("user_id, issues.subject, hours, spent_on")
+    @time_entries = @time_entries.where(:created_on => @from..@to)
+    if !params[:user_id].nil? and !params[:user_id].blank?
+      @work_items = @time_entries.where(:user_id => params[:user_id])
     end
+    @time_entries = @time_entries.joins(:issue)
+
+    # work items
+    if ActiveRecord::Base.connection.adapter_name == 'MySQL'
+      @work_items = WorkTime.select("user_id, users.firstname, users.lastname, sum(unix_timestamp(end) - unix_timestamp(start) ) diff")
+    else 
+      @work_items = WorkTime.select("user_id, users.firstname, users.lastname, sum(strftime('%s', end) - strftime('%s', start)) diff")
+    end
+
+    @work_items = @work_items.where("end is not null")
+    @work_items = @work_items.where(:start => @from..@to)
+    if !params[:user_id].nil? and !params[:user_id].blank?
+      @work_items = @work_items.where(:user_id => params[:user_id])
+    end
+    @work_items = @work_items.group("user_id")
+    @work_items = @work_items.joins(:user)
   end
 
   def toggle

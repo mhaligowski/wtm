@@ -2,6 +2,29 @@
     <%= stylesheet_link_tag 'wtm', :plugin => :wtm %>
 <% end %>
 
+<%= form_tag({}, :method => :get) do %>
+
+<fieldset><legend><%= l(:label_filter_plural) %></legend>
+
+<% if User.current.admin? %>
+<label for='user_id'><%= l(:field_user) %>:</label>
+<%= select_tag 'user_id', users_for_filtering(@user_id), :class => "small"  %>
+<% end %>
+
+<%= label_tag('from', l(:label_date_from)) %>
+<%= text_field_tag('from', @from, :size => 10) %>
+<%= calendar_for('from') %>
+
+<%= label_tag('to', l(:label_date_to)) %>
+<%= text_field_tag('to', @to, :size => 10) %>
+<%= calendar_for('to') %>
+
+<%= submit_tag l(:button_apply), :class => "small", :name => nil %>
+<%= link_to l(:button_clear), "/wtm", :class => 'icon icon-reload' %>
+</fieldset>
+
+<% end %>
+
 <table class="list">
 	<thead>
 		<%= content_tag "th", "Lp." %>
