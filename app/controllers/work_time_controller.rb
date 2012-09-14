@@ -51,8 +51,8 @@ class WorkTimeController < ApplicationController
   end
 
   def report_task_time
-    sort_init [ %w( user_id lastname ) ]
-    sort_update %w(user_id lastname)
+    sort_init [ %w( lastname ) ]
+    sort_update %w( lastname )
 
     @from = params[:from].nil? ? Date.today.at_beginning_of_month : params[:from]
     @to = params[:to].nil? ? Date.today.at_end_of_month : params[:to]
@@ -67,9 +67,9 @@ class WorkTimeController < ApplicationController
 
     # work items
     if ActiveRecord::Base.connection.adapter_name == 'MySQL'
-      @work_items = WorkTime.select("user_id, users.firstname, users.lastname, sum(unix_timestamp(end) - unix_timestamp(start) ) diff")
+      @work_items = WorkTime.select("user_id, users.firstname, users.lastname lastname, sum(unix_timestamp(end) - unix_timestamp(start) ) diff")
     else 
-      @work_items = WorkTime.select("user_id, users.firstname, users.lastname, sum(strftime('%s', end) - strftime('%s', start)) diff")
+      @work_items = WorkTime.select("user_id, users.firstname, users.lastname lastname, sum(strftime('%s', end) - strftime('%s', start)) diff")
     end
 
     @work_items = @work_items.where("end is not null")
@@ -79,6 +79,9 @@ class WorkTimeController < ApplicationController
     end
     @work_items = @work_items.group("user_id")
     @work_items = @work_items.joins(:user)
+    @work_items = @work_items.order sort_clause
+
+    @work_items
   end
 
   def toggle
