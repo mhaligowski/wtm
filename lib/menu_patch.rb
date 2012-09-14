@@ -7,6 +7,7 @@ module MenuPatch
   def self.included(base)
     base.send(:extend, ClassMethods)
     base.send(:include, InstanceMethods)
+
     base.class_eval do
       alias_method_chain :render_main_menu, :wtm
       alias_method_chain :display_main_menu?, :wtm
@@ -32,8 +33,13 @@ module MenuPatch
   module InstanceMethods
 
     def display_main_menu_with_wtm?(project)
-      User.current.admin? && 
-      Redmine::MenuManager.items(Redmine::MenuManager::MenuHelper.get_menu_name(project, params)).children.present?
+      menu_name = Redmine::MenuManager::MenuHelper.get_menu_name(project, params)
+
+      if menu_name == :wtm_menu && !User.current.admin?
+        false
+      else
+        Redmine::MenuManager.items(menu_name).children.present?
+      end
     end
 
     def render_main_menu_with_wtm(project)
