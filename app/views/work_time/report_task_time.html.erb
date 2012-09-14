@@ -1,5 +1,32 @@
-<% unless @work_items.nil? %>
-	<% @work_items.each do |wt| %>
-		<%= wt.users.firstname %>
-	<% end %>
+<% content_for :header_tags do %>
+    <%= stylesheet_link_tag 'wtm', :plugin => :wtm %>
 <% end %>
+
+<table class="list">
+	<thead>
+		<%= content_tag "th", "Lp." %>
+		<%= sort_header_tag 'lastname', :caption => l(:label_user) %>
+		<%= content_tag "th", "Liczba godzin" %>
+	</thead>
+	<tbody>
+	</tbody>
+	<% unless @work_items.nil? %>
+		<% @work_items.each do |wt| %>
+			<% entries = @time_entries.where(:user_id => wt.user_id) %>
+			<tr class="<%= entries.sum("hours") <= wt.diff / 60 / 60 ? "red" : "green" %>" >
+				<td>1</td>
+				<%= content_tag "td", wt.firstname + " " + wt.lastname %>
+				<%= content_tag "td", number_with_delimiter(wt.diff / 3600) %>
+
+				<% @time_entries.where(:user_id => wt.user_id).each do |te| %>
+					<tr>
+						<%= content_tag "td", "" %>
+						<%= content_tag "td", te.subject %>
+						<%= content_tag "td", number_with_delimiter(te.hours) %>
+					</tr>
+				<% end %>
+			</tr>
+		<% end %>
+	<% end %>
+</table>
+

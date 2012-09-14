@@ -11,3 +11,7 @@
 #wtm-button.running {
 	background-color: #FAA732;
 }
+
+table.list tr.red {
+	background-color: #fe4040;
+}
