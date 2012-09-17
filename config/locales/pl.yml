@@ -16,3 +16,5 @@ pl:
   permission_toggle_wtm_button_remote: Przełącz przysisk w czasie pracy zdalnej
   field_show_wtm_button: Pokazuj przycisk rejestracji czasu pracy
   field_remote_wtm_toggle: Może przełączać przysisk rejestracji czasu pracy przy zdalnym połączeniu
+  message_wtm_settings: Ustawienia wtyczki WTM
+  label_local_ip_pattern: Szablon sieci lokalnej

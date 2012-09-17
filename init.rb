@@ -10,8 +10,9 @@ Redmine::Plugin.register :wtm do
   version '0.1-dev'
   author_url 'http://github.com/mhaligowski/'
 
-  permission :view_wtm_button, { :work_items => [ :toggle ] }, :public => true
-  permission :toggle_wtm_button_remote, { :work_items => [ :toggle ] },  :public => true
+  settings :default => {
+    'local_ip_pattern' => '127\.0\.\0\.1'
+  }, :partial => "settings/wtm_settings"
   
   menu(:wtm_menu,
   	:work_items_menu_item,
