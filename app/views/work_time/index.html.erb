@@ -36,6 +36,7 @@
         <% if User.current.admin? %><%= sort_header_tag('remoteip', :caption => l(:label_ip)) %><% end %>
         <%= sort_header_tag('start', :caption => l(:label_start)) %>
         <%= sort_header_tag('end', :caption => l(:label_end)) %>
+        <th title="<%= l(:label_diff_hours) %>"><%= l(:label_diff_hours) %></th>
         <% previous_group = false %>
       </tr>
     </thead>
@@ -47,6 +48,11 @@
       		<% if User.current.admin? %> <td><%= work_time.remoteip %></td> <% end %>
       		<td><%= format_time(work_time.start) %></td>
       		<td><%= format_time(work_time.end) %></td>
+          <% hours = ((work_time.end - work_time.start) / 1.hour).floor %>
+          <% left = (work_time.end - work_time.start) % 1.hour %>
+          <% minutes = (left / 1.minute).floor %>
+          <% seconds = (left % 1.minute).floor %>
+          <td><%= hours %>h<%= minutes %>m<%= seconds %>s</td>
       	</tr>
       <% end %>
     </tbody>

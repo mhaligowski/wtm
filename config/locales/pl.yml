@@ -19,3 +19,4 @@ pl:
   message_wtm_settings: Ustawienia wtyczki WTM
   label_local_ip_pattern: Szablon sieci lokalnej
   message_not_permitted_remote: Brak uprawnień do pracy zdalnej
+  label_diff_hours: Czas pracy
