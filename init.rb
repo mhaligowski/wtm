@@ -1,5 +1,6 @@
 require 'wtm_hook_listener'
 require "menu_patch"
+require "user_patch"
 
 Redmine::Plugin.register :wtm do
   name 'Wtm plugin'
@@ -7,7 +8,9 @@ Redmine::Plugin.register :wtm do
   description 'Redmine plugin registering work time'
   version '0.1-dev'
   author_url 'http://github.com/mhaligowski/'
-  permission :work_items, { :work_items => [:index, :toggle] }, :public => false
+
+  permission :view_wtm_button, { :work_items => [ :toggle ] }, :public => true
+  permission :toggle_wtm_button_remote, { :work_items => [ :toggle ] },  :public => true
   
   menu(:wtm_menu,
   	:work_items_menu_item,
