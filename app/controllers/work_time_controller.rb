@@ -1,10 +1,14 @@
 class WorkTimeController < ApplicationController
   unloadable
 
-  before_filter :require_login
+  before_filter :require_login, :get_settings
 
   helper :sort
   include SortHelper
+
+  def get_settings
+    @settings = Setting.plugin_wtm
+  end
 
   def index
     sort_init [ %w( user_id remoteip start stop ) ]
@@ -87,20 +91,39 @@ class WorkTimeController < ApplicationController
   def toggle
   	user = User.current
 
-  	wt = WorkTime.current(user)
+  	@wt = WorkTime.current(user)
+
+    # can work remotely?
+    local_ip_pattern = @settings['local_ip_pattern']
+
+    is_remote = Regexp.new(local_ip_pattern).match(request.remote_ip).nil? # when it's nil => the ip doesn't match local => remote
+    puts is_remote
+    puts user.remote_wtm_toggle
+
+    if !user.remote_wtm_toggle? && is_remote
+      respond_to do |format|
+        format.js {
+          render 'work_time/error', :layout => false
+        }
+      end
+      return
+    end
+
+    puts "here"
+
+    puts @wt
 
   	# not started
-  	if wt.nil?
-  		wt = WorkTime.create(
+  	if @wt.nil?
+  		@wt = WorkTime.create(
   		  :user_id => user.id,
   			:start => DateTime.current(),
         :remoteip => request.remote_ip
       )
-
   	else
   		# if started, just set the end date
-  		wt.end = DateTime.current()
-  		wt.save()
+  		@wt.end = DateTime.current()
+  		@wt.save!
   	end 
 
   	respond_to do |format|

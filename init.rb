@@ -11,7 +11,7 @@ Redmine::Plugin.register :wtm do
   author_url 'http://github.com/mhaligowski/'
 
   settings :default => {
-    'local_ip_pattern' => '127\.0\.\0\.1'
+    'local_ip_pattern' => '127.0.0.1'
   }, :partial => "settings/wtm_settings"
   
   menu(:wtm_menu,
