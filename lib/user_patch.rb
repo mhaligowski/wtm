@@ -13,6 +13,8 @@ module UserPatch
 
 			after_create :create_wtm_permission
 			after_destroy :destroy_wtm_permission	
+
+			has_one :wtm_permission
 		end
 	end
 
@@ -21,7 +23,6 @@ module UserPatch
 
 	module InstanceMethods
 		def create_wtm_permission
-			puts "dupa"
 			self.reload
 			WtmPermission.create :user_id => self.id
 
@@ -32,17 +33,29 @@ module UserPatch
 			WtmPermission.destroy_all :user_id => self.id
 		end
 
+		def show_wtm_button
+			self.wtm_permission.can_see_wtm_button
+		end
+
+		def show_wtm_button=(val)
+			self.wtm_permission.can_see_wtm_button = val
+		end
+
+		def remote_wtm_toggle
+			self.wtm_permission.can_work_remotely
+		end
+
+		def remote_wtm_toggle=(val)
+			self.wtm_permission.can_work_remotely = val
+		end
+
 		def show_wtm_button?
-			true
+			self.show_wtm_button
 		end
 
 		def remote_wtm_toggle?
-			true
+			self.remote_wtm_toggle
 		end
-
-		def show_wtm_button; false end
-		def remote_wtm_toggle; false end
-
 	end
 end
 

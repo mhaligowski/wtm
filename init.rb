@@ -1,6 +1,7 @@
 require 'wtm_hook_listener'
 require "menu_patch"
 require "user_patch"
+require 'users_controller_patch'
 
 Redmine::Plugin.register :wtm do
   name 'Wtm plugin'
