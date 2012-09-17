@@ -14,4 +14,5 @@ pl:
   report_time_task: Raport zadań i czasu
   permission_view_wtm_button: Pokaż przycisk
   permission_toggle_wtm_button_remote: Przełącz przysisk w czasie pracy zdalnej
-  
+  field_show_wtm_button: Pokazuj przycisk rejestracji czasu pracy
+  field_remote_wtm_toggle: Może przełączać przysisk rejestracji czasu pracy przy zdalnym połączeniu

@@ -31,6 +31,18 @@ module UserPatch
 		def destroy_wtm_permission
 			WtmPermission.destroy_all :user_id => self.id
 		end
+
+		def show_wtm_button?
+			true
+		end
+
+		def remote_wtm_toggle?
+			true
+		end
+
+		def show_wtm_button; false end
+		def remote_wtm_toggle; false end
+
 	end
 end
 
