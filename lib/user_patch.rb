@@ -34,7 +34,11 @@ module UserPatch
 		end
 
 		def show_wtm_button
-			self.wtm_permission.can_see_wtm_button
+			if self.wtm_permission.nil?
+				false
+			else
+				self.wtm_permission.can_see_wtm_button
+			end
 		end
 
 		def show_wtm_button=(val)
@@ -42,7 +46,11 @@ module UserPatch
 		end
 
 		def remote_wtm_toggle
-			self.wtm_permission.can_work_remotely
+			if self.wtm_permission.nil?
+				false
+			else
+				self.wtm_permission.can_work_remotely
+			end
 		end
 
 		def remote_wtm_toggle=(val)
