@@ -3,7 +3,7 @@
     <%= javascript_include_tag 'wtm_clock', :plugin => :wtm %>
 <% end %>
 
-<% if User.current.logged? and User.current.show_wtm_button? %>
+<% if User.current.logged? and User.current.can_see_wtm_button? %>
 <% wt = WorkTime.current(User.current) %>
 <div id="wtm-button" class="<%= wt.nil? ? 'new' : 'running' %>">
 	<% if wt.nil? %> 

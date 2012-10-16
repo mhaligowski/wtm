@@ -33,7 +33,7 @@ module UserPatch
 			WtmPermission.destroy_all :user_id => self.id
 		end
 
-		def show_wtm_button
+		def can_see_wtm_button
 			if self.wtm_permission.nil?
 				false
 			else
@@ -41,11 +41,11 @@ module UserPatch
 			end
 		end
 
-		def show_wtm_button=(val)
+		def can_see_wtm_button=(val)
 			self.wtm_permission.can_see_wtm_button = val
 		end
 
-		def remote_wtm_toggle
+		def can_work_remotely
 			if self.wtm_permission.nil?
 				false
 			else
@@ -53,16 +53,16 @@ module UserPatch
 			end
 		end
 
-		def remote_wtm_toggle=(val)
+		def can_work_remotely=(val)
 			self.wtm_permission.can_work_remotely = val
 		end
 
-		def show_wtm_button?
-			self.show_wtm_button
+		def can_see_wtm_button?
+			self.can_see_wtm_button
 		end
 
-		def remote_wtm_toggle?
-			self.remote_wtm_toggle
+		def can_work_remotely?
+			self.can_work_remotely
 		end
 	end
 end

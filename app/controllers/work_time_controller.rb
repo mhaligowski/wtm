@@ -1,3 +1,5 @@
+require 'netaddr'
+
 class WorkTimeController < ApplicationController
   unloadable
 
@@ -93,14 +95,24 @@ class WorkTimeController < ApplicationController
 
   	@wt = WorkTime.current(user)
 
-    # can work remotely?
-    local_ip_pattern = @settings['local_ip_pattern']
+    # list of IPs that are allowed
+    ips = NetAddr.merge(
+      @settings['local_ip_pattern'].split(",").map { |ip|  NetAddr::CIDR.create(ip) }
+    )
 
-    is_remote = Regexp.new(local_ip_pattern).match(request.remote_ip).nil? # when it's nil => the ip doesn't match local => remote
-    puts is_remote
-    puts user.remote_wtm_toggle
+    # the current IP is on the list?
+    is_ip_allowed = false
+    ips.each do |ip| 
+      if 
+        ip.contains? request.remote_ip 
+      then
+        is_ip_allowed = true
+        break
+      end
+    end
 
-    if !user.remote_wtm_toggle? && is_remote
+    # check if user can work remotely
+    if !user.remote_wtm_toggle? && !is_ip_allowed
       respond_to do |format|
         format.js {
           render 'work_time/error', :layout => false
@@ -108,10 +120,6 @@ class WorkTimeController < ApplicationController
       end
       return
     end
-
-    puts "here"
-
-    puts @wt
 
   	# not started
   	if @wt.nil?

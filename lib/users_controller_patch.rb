@@ -15,8 +15,10 @@ module UsersControllerPatch
 
 	module InstanceMethods
 		def update_with_wtm
-			@user.show_wtm_button = params[:user][:show_wtm_button] if params[:user][:show_wtm_button]
-			@user.remote_wtm_toggle = params[:user][:remote_wtm_toggle] if params[:user][:remote_wtm_toggle]
+			if @user.wtm_permission.nil? then @user.create_wtm_permission end
+
+			@user.can_see_wtm_button = params[:user][:can_see_wtm_button] if params[:user][:can_see_wtm_button]
+			@user.can_work_remotely = params[:user][:can_work_remotely] if params[:user][:can_work_remotely]
 
 			@user.wtm_permission.save!
 
