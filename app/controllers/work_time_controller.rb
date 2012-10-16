@@ -97,7 +97,8 @@ class WorkTimeController < ApplicationController
 
     # list of IPs that are allowed
     ips = NetAddr.merge(
-      @settings['local_ip_pattern'].split(",").map { |ip|  NetAddr::CIDR.create(ip) }
+      @settings['local_ip_pattern'].split(",").map { |ip|  NetAddr::CIDR.create(ip) },
+      :Objectify => true
     )
 
     # the current IP is on the list?
@@ -112,7 +113,7 @@ class WorkTimeController < ApplicationController
     end
 
     # check if user can work remotely
-    if !user.remote_wtm_toggle? && !is_ip_allowed
+    if !user.can_work_remotely? && !is_ip_allowed
       respond_to do |format|
         format.js {
           render 'work_time/error', :layout => false
