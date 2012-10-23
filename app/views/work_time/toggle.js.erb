@@ -1,3 +1,5 @@
-$('wtm-button').replace('<%= escape_javascript(render(:partial => 'work_time/button')) %>');
+$('wtm-buttons-panel').replace('<%= escape_javascript(render(:partial => 'work_time/button')) %>');
 
-wtm.start_clock();
+$$('.running .clock').each( function(item) {
+	wtm.start_clock(item);
+});

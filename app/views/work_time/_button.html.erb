@@ -3,15 +3,41 @@
     <%= javascript_include_tag 'wtm_clock', :plugin => :wtm %>
 <% end %>
 
-<% if User.current.logged? and User.current.can_see_wtm_button? %>
-<% wt = WorkTime.current(User.current) %>
-<div id="wtm-button" class="<%= wt.nil? ? 'new' : 'running' %>">
-	<% if wt.nil? %> 
-		<%= link_to t(:wtm_start), {:controller => "work_time", :action => "toggle"}, { :remote => true } %> 
-	<% else %>
-		<%= link_to t(:wtm_stop), {:controller => "work_time", :action => "toggle"}, { :remote => true } %>
-		<!-- clock -->
-		<span id="wtm-clock" data-start=<%= (wt.start.to_i * 1000) %>></span>
+<div id="wtm-buttons-panel">
+
+<% if User.current.logged? \
+	and User.current.can_see_wtm_button? %>
+	
+	<% wt = WorkTime.current(User.current) %>
+	<%# WTM BUTTON %>
+	<div id="wtm" class="wtm-button <%= wt.nil? ? 'new' : 'running' %>">
+		<% if wt.nil? %> 
+			<%= link_to t(:wtm_start), {:controller => "work_time", :action => "toggle"}, { :remote => true } %> 
+		<% else %>
+			<%= link_to t(:wtm_stop), {:controller => "work_time", :action => "toggle"}, { :remote => true } %>
+			<!-- clock -->
+			<span class="clock" data-start=<%= (wt.start.to_i * 1000) %>></span>
+		<% end %>	
+	</div>
+
+	<%# ENGLISH BUTTON %>
+	<% if User.current.logged? \
+		and User.current.can_see_english_button? %>
+
+		<% english_time = EnglishTime.current(User.current) %>
+
+		<div id="english" class="wtm-button <%= english_time.nil? ? 'new' : 'running' %>">
+			<% if english_time.nil? %>
+			 <%= link_to t(:english_start), {:controller => "english_time", :action => "toggle"}, { :remote => true } %>
+			<% else %>
+				<%= link_to t(:english_stop), {:controller => "english_time", :action => "toggle"}, { :remote => true } %>
+
+				<span class="clock" data-start=<%= (english_time.start.to_i * 1000) %>></span>
+
+			<% end %>
+		</div>
 	<% end %>
-</div>
+
 <% end %>
+
+</div> <%# wtm-buttons-panel %>

@@ -3,6 +3,8 @@ pl:
   work_time_menu_item: WTM
   wtm_start: Rozpocznij pracę
   wtm_stop: Zakończ pracę
+  english_start: Rozpocznij angielski
+  english_stop: Zakończ angielski
   label_interval: Zakres danych
   label_person: Użytkownik
   label_ip: Adres IP
@@ -16,6 +18,7 @@ pl:
   permission_toggle_wtm_button_remote: Przełącz przysisk w czasie pracy zdalnej
   field_can_see_wtm_button: Pokazuj przycisk rejestracji czasu pracy
   field_can_work_remotely: Może przełączać przysisk rejestracji czasu pracy przy zdalnym połączeniu
+  field_can_see_english_button: Pokazuj przycisk nauki języka angielskiego
   message_wtm_settings: Ustawienia wtyczki WTM
   label_local_ip_pattern: Szablon sieci lokalnej
   message_not_permitted_remote: Brak uprawnień do pracy zdalnej

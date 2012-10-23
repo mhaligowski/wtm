@@ -1,6 +1,4 @@
-#wtm-button {
-	background-color: #5BB75B;
-	color: white;
+.wtm-button {
 	height: 1.8em;
 	text-align: center;
 	font-weight: bold;
@@ -8,10 +6,24 @@
 	padding: 2px 2px 0px 6px;
 }
 
-#wtm-button.running {
-	background-color: #FAA732;
-}
 
 table.list tr.red {
 	background-color: #fe4040;
 }
+
+#wtm {
+	background-color: #5BB75B;
+}
+
+#wtm-buttons-panel > .wtm-button.running {
+	background-color: #FAA732;
+}
+
+#english {
+	background-color: #2C4056;
+}
+
+#english.new > a {
+	color: white;
+}
+

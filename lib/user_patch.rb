@@ -45,6 +45,10 @@ module UserPatch
 			self.wtm_permission.can_see_wtm_button = val
 		end
 
+		def can_see_wtm_button?
+			self.can_see_wtm_button
+		end
+
 		def can_work_remotely
 			if self.wtm_permission.nil?
 				false
@@ -57,12 +61,25 @@ module UserPatch
 			self.wtm_permission.can_work_remotely = val
 		end
 
-		def can_see_wtm_button?
-			self.can_see_wtm_button
-		end
 
 		def can_work_remotely?
 			self.can_work_remotely
+		end
+
+		def can_see_english_button
+			if self.wtm_permission.nil?
+				false
+			else
+				self.wtm_permission.can_see_english_button
+			end
+		end
+
+		def can_see_english_button=(val)
+			self.wtm_permission.can_see_english_button = val
+		end
+
+		def can_see_english_button?
+			self.can_see_english_button
 		end
 	end
 end

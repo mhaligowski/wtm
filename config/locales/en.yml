@@ -4,6 +4,8 @@ en:
   work_time_menu_item: WTM
   wtm_start: Start work
   wtm_stop: Stop work
+  english_start: Start English lesson
+  english_stop: Stop English lesson 
   label_interval: Interval
   label_person: User
   label_ip: IP Address
@@ -11,3 +13,4 @@ en:
   label_end: End
   field_can_see_wtm_button: Can see WTM button
   field_can_work_remotely: Can toggle WTM button while working remotely
+  field_can_see_english_button: Can see English learning button

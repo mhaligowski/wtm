@@ -11,3 +11,5 @@ get 'wtm/report_task_time', :to => 'work_time#report_task_time'
 post 'wtm/report_task_time', :to => 'work_time#report_task_time'
 
 get 'wtm/toggle', :to => 'work_time#toggle'
+
+get 'english/toggle', :to => 'english_time#toggle'

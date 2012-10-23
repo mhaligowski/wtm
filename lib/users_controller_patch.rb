@@ -19,6 +19,7 @@ module UsersControllerPatch
 
 			@user.can_see_wtm_button = params[:user][:can_see_wtm_button] if params[:user][:can_see_wtm_button]
 			@user.can_work_remotely = params[:user][:can_work_remotely] if params[:user][:can_work_remotely]
+			@user.can_see_english_button = params[:user][:can_see_english_button] if params[:user][:can_see_english_button]
 
 			@user.wtm_permission.save!
 
