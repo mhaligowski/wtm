@@ -1,0 +1,27 @@
+  <tr data-wt-id='<%= work_time.id %>'>
+    <% if User.current.admin? %> <td><%= work_time.user.login %></td> <% end %>
+    <% if User.current.admin? %> <td><%= work_time.remoteip %></td> <% end %>
+    <td class='start_time'>
+      <span><%= format_time(work_time.start) %></span>
+      <% if User.current.admin? %>
+        <%= link_to raw('<small>(' + l(:button_edit) + ')</small>'), work_time_path(work_time), :remote => true, :method => :put %>
+      <% end %>
+    </td>
+    <td class='finish_time'>
+      <span><%= format_time(work_time.end) %></span>
+      <% if User.current.admin? %>
+        <%= link_to raw('<small>(' + l(:button_edit) + ')</small>'), work_time_path(work_time), :remote => true, :method => :put %>
+      <% end %>
+
+    </td>
+    
+    <% if !work_time.end.nil? %>
+      <% hours = ((work_time.end - work_time.start) / 1.hour).floor %>
+      <% left = (work_time.end - work_time.start) % 1.hour %>
+      <% minutes = (left / 1.minute).floor %>
+      <% seconds = (left % 1.minute).floor %>
+      <td><%= hours %>h<%= minutes %>m<%= seconds %>s</td>
+    <% else %>
+      <td></td>
+    <% end %>
+  </tr>

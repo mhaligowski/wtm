@@ -43,22 +43,7 @@
 
     <tbody>
       <% @work_items.each do |work_time| %>
-      	<tr>
-      		<% if User.current.admin? %> <td><%= work_time.user.login %></td> <% end %>
-      		<% if User.current.admin? %> <td><%= work_time.remoteip %></td> <% end %>
-      		<td><%= format_time(work_time.start) %></td>
-      		<td><%= format_time(work_time.end) %></td>
-          
-          <% if !work_time.end.nil? %>
-            <% hours = ((work_time.end - work_time.start) / 1.hour).floor %>
-            <% left = (work_time.end - work_time.start) % 1.hour %>
-            <% minutes = (left / 1.minute).floor %>
-            <% seconds = (left % 1.minute).floor %>
-            <td><%= hours %>h<%= minutes %>m<%= seconds %>s</td>
-          <% else %>
-            <td></td>
-          <% end %>
-      	</tr>
+        <%= render :partial => "row", :locals => {:work_time => work_time} %>
       <% end %>
     </tbody>
 </table>

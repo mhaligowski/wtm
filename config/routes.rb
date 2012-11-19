@@ -13,3 +13,5 @@ post 'wtm/report_task_time', :to => 'work_time#report_task_time'
 get 'wtm/toggle', :to => 'work_time#toggle'
 
 get 'english/toggle', :to => 'english_time#toggle'
+
+resources :work_time, :only => [:index, :show, :edit, :update] 

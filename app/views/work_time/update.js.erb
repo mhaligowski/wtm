@@ -1,0 +1,9 @@
+var subst = "<%= escape_javascript(render(:partial => "row", :locals => {:work_time => @work_time})) %>";
+var elmt = $$("tr[data-wt-id=<%= @work_time.id%>]")[0];
+Element.replace(elmt, subst);
+
+$$(".start_time a, .finish_time a").each(function(elmt) { elmt.stopObserving(); });
+
+$$(".start_time a, .finish_time a").each(function(elmt) {
+	wtm.edit_time(elmt);
+});

@@ -139,4 +139,14 @@ class WorkTimeController < ApplicationController
   		format.js { render :layout => false }
   	end
   end
+
+  def update
+    Time.zone = User.current.time_zone
+
+    @work_time = WorkTime.find(params[:id])
+    @work_time.start = Time.parse(params[:start]) if params[:start]
+    @work_time.end = Time.parse(params[:end]) if params[:end]
+
+    @work_time.save!
+  end
 end
