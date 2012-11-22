@@ -21,9 +21,5 @@ table.list tr.red {
 
 #english {
 	background-color: #2C4056;
+	display: none;
 }
-
-#english.new > a {
-	color: white;
-}
-

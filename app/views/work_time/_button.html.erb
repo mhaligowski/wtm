@@ -24,17 +24,8 @@
 	<% if User.current.logged? \
 		and User.current.can_see_english_button? %>
 
-		<% english_time = EnglishTime.current(User.current) %>
-
-		<div id="english" class="wtm-button <%= english_time.nil? ? 'new' : 'running' %>">
-			<% if english_time.nil? %>
-			 <%= link_to t(:english_start), {:controller => "english_time", :action => "toggle"}, { :remote => true } %>
-			<% else %>
-				<%= link_to t(:english_stop), {:controller => "english_time", :action => "toggle"}, { :remote => true } %>
-
-				<span class="clock" data-start=<%= (english_time.start.to_i * 1000) %>></span>
-
-			<% end %>
+		<div id="english" class="wtm-button">
+			 <%= link_to t(:english_start), {:controller => "work_time", :action => "toggle"}, { :remote => true } %>
 		</div>
 	<% end %>
 

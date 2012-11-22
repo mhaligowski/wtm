@@ -1,4 +1,5 @@
 require 'netaddr'
+require 'date'
 
 class WorkTimeController < ApplicationController
   unloadable
@@ -143,10 +144,13 @@ class WorkTimeController < ApplicationController
   def update
     Time.zone = User.current.time_zone
 
-    @work_time = WorkTime.find(params[:id])
-    @work_time.start = Time.parse(params[:start]) if params[:start]
-    @work_time.end = Time.parse(params[:end]) if params[:end]
-
-    @work_time.save!
+    begin
+      @work_time = WorkTime.find(params[:id])
+      @work_time.start = Time.parse(params[:start]) if params[:start]
+      @work_time.end = Time.parse(params[:end]) if params[:end]
+      @work_time.save!
+    rescue
+      @error = "Nieprawidłowa wartość!"
+    end
   end
 end

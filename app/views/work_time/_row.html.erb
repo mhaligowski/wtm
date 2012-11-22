@@ -2,13 +2,13 @@
     <% if User.current.admin? %> <td><%= work_time.user.login %></td> <% end %>
     <% if User.current.admin? %> <td><%= work_time.remoteip %></td> <% end %>
     <td class='start_time'>
-      <span><%= format_time(work_time.start) %></span>
+      <span><%= format_time(work_time.start, :long) %></span>
       <% if User.current.admin? %>
         <%= link_to raw('<small>(' + l(:button_edit) + ')</small>'), work_time_path(work_time), :remote => true, :method => :put %>
       <% end %>
     </td>
     <td class='finish_time'>
-      <span><%= format_time(work_time.end) %></span>
+      <span><%= format_time(work_time.end, :long) %></span>  
       <% if User.current.admin? %>
         <%= link_to raw('<small>(' + l(:button_edit) + ')</small>'), work_time_path(work_time), :remote => true, :method => :put %>
       <% end %>
