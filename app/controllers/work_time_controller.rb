@@ -153,4 +153,16 @@ class WorkTimeController < ApplicationController
       @error = "Nieprawidłowa wartość!"
     end
   end
+
+  def english_toggle
+    @wt = WorkTime.find(params[:id])
+    if User.current.can_see_english_button?
+      @wt.has_english = true
+      @wt.save!
+    end
+
+    respond_to do |format|
+      format.js { render "toggle", :layout => false}
+    end
+  end
 end

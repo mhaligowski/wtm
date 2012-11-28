@@ -12,7 +12,9 @@
       <% if User.current.admin? %>
         <%= link_to raw('<small>(' + l(:button_edit) + ')</small>'), work_time_path(work_time), :remote => true, :method => :put %>
       <% end %>
-
+    </td>
+    <td class="english">
+      <%= work_time.has_english? ? "+" : "-" %>
     </td>
     
     <% if !work_time.end.nil? %>

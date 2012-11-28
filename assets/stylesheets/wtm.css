@@ -23,3 +23,7 @@ table.list tr.red {
 	background-color: #2C4056;
 	display: none;
 }
+
+#english.visible {
+	display: block;
+}

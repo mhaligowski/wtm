@@ -36,6 +36,7 @@
         <% if User.current.admin? %><%= sort_header_tag('remoteip', :caption => l(:label_ip)) %><% end %>
         <%= sort_header_tag('start', :caption => l(:label_start)) %>
         <%= sort_header_tag('end', :caption => l(:label_end)) %>
+        <th title="<%= l(:label_english) %>"><%= l(:label_english) %></th>
         <th title="<%= l(:label_diff_hours) %>"><%= l(:label_diff_hours) %></th>
         <% previous_group = false %>
       </tr>

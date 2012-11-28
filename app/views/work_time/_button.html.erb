@@ -22,10 +22,11 @@
 
 	<%# ENGLISH BUTTON %>
 	<% if User.current.logged? \
-		and User.current.can_see_english_button? %>
+		and User.current.can_see_english_button? \
+		and not (wt.nil? or wt.has_english?) %>
 
-		<div id="english" class="wtm-button">
-			 <%= link_to t(:english_start), {:controller => "work_time", :action => "toggle"}, { :remote => true } %>
+		<div id="english" class="wtm-button <%= "visible" if not wt.nil? and wt.end.nil? %> ">
+			 <%= link_to t(:english_start), { :controller => "work_time", :action => "english_toggle", :id => wt.id}, :remote => true %>
 		</div>
 	<% end %>
 
